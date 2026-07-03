@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Ver Libro</title></head>
+<body>
+
+<h1 th:text="${libro.nombrelibro}"></h1>
+
+<p><strong>Título:</strong> <span th:text="${libro.titulo}"></span></p>
+
+<p><strong>Características:</strong> <span th:text="${libro.caracteristicas}"></span></p>
+
+<p><strong>Contenido:</strong> <span th:text="${libro.contenido}"></span></p>
+
+<h2>Prefacio</h2>
+<p th:text="${libro.prefacio}"></p>
+
+<h2>Capítulos</h2>
+<pre th:text="${libro.capitulos}"></pre>
+
+<a th:href="@{/libros}">Volver</a>
+
+</body>
+</html>

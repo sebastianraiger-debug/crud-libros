@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Libros</title>
+
+    <!-- Estilos simples para que la tabla se vea bien -->
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Listado de libros</h1>
+
+<!-- Botón para crear un libro nuevo -->
+<a th:href="@{/libros/nuevo}">Nuevo libro</a>
+
+<!-- Tabla -->
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Títulos</th>
+        <th>Acciones</th>
+    </tr>
+
+    <!-- Recorre la lista de libros -->
+    <tr th:each="libro : ${libros}">
+        <td th:text="${libro.id}"></td>
+        <td th:text="${libro.nombrelibro}"></td>
+        <td th:text="${libro.titulo}"></td>
+
+        <td>
+            <a th:href="@{|/libros/ver/${libro.id}|}">Ver</a>
+            <a th:href="@{|/libros/editar/${libro.id}|}">Editar</a>
+            <a th:href="@{|/libros/eliminar/${libro.id}|}">Eliminar</a>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>
