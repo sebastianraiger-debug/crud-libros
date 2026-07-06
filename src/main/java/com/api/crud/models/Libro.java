@@ -9,6 +9,7 @@ public class Libro {
 private Long id;
 
 private String nombrelibro;
+private String autor;
 
 @Lob
 private String titulo;
@@ -44,6 +45,13 @@ private String prefacio;
 
     public String getCaracteristicas() {
         return caracteristicas;
+    }
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
     public void setCaracteristicas(String caracteristicas) {
