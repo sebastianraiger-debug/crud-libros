@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/libros")
@@ -19,8 +20,13 @@ class LibroController {
     }
 
     @GetMapping
-    public String listar(Model model) {
-        model.addAttribute("libros", libroRepository.findAll());
+    public String listar(Model model, @RequestParam(required = false) String buscar) {
+        if (buscar != null && !buscar.isEmpty()) {
+            model.addAttribute("libros", libroRepository.findByNombrelibroContainingIgnoreCase(buscar));
+        } else {
+            model.addAttribute("libros", libroRepository.findAll());
+        }
+        model.addAttribute("buscar", buscar);
         return "libros/lista";
     }
 
@@ -31,11 +37,13 @@ class LibroController {
     }
 
     @PostMapping
-    public String guardar(@Valid @ModelAttribute Libro libro, BindingResult resultado) {
+    public String guardar(@Valid @ModelAttribute Libro libro, BindingResult resultado,
+                          RedirectAttributes redirectAttributes) {
         if (resultado.hasErrors()) {
             return "libros/formulario";
         }
         libroRepository.save(libro);
+        redirectAttributes.addFlashAttribute("mensaje", "Libro guardado correctamente ✅");
         return "redirect:/libros";
     }
 
@@ -57,4 +65,3 @@ class LibroController {
         return "libros/ver";
     }
 }
-
