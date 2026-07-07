@@ -1,23 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><meta charset="UTF-8"><title>Ver Libro</title></head>
-<body>
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Libro</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
 
-<h1 th:text="${libro.nombrelibro}"></h1>
+<div class="container mt-4" style="max-width: 700px;">
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h4 th:text="${libro.nombrelibro}" class="mb-0"></h4>
+            <span class="badge bg-primary" th:text="${libro.autor}"></span>
+        </div>
+        <div class="card-body">
 
-<p><strong>Título:</strong> <span th:text="${libro.titulo}"></span></p>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Título:</strong> <span th:text="${libro.titulo}"></span></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Características:</strong> <span th:text="${libro.caracteristicas}"></span></p>
+                </div>
+            </div>
 
-<p><strong>Características:</strong> <span th:text="${libro.caracteristicas}"></span></p>
+            <div class="mb-3">
+                <h5 class="border-bottom pb-2">Prefacio</h5>
+                <p th:text="${libro.prefacio}" class="text-muted"></p>
+            </div>
 
-<p><strong>Contenido:</strong> <span th:text="${libro.contenido}"></span></p>
+            <div class="mb-3">
+                <h5 class="border-bottom pb-2">Contenido</h5>
+                <p th:text="${libro.contenido}" class="text-muted"></p>
+            </div>
 
-<h2>Prefacio</h2>
-<p th:text="${libro.prefacio}"></p>
+            <div class="mb-3">
+                <h5 class="border-bottom pb-2">Capítulos</h5>
+                <pre th:text="${libro.capitulos}" class="bg-light p-3 rounded"></pre>
+            </div>
 
-<h2>Capítulos</h2>
-<pre th:text="${libro.capitulos}"></pre>
-
-<a th:href="@{/libros}">Volver</a>
+        </div>
+        <div class="card-footer d-flex gap-2">
+            <a th:href="@{|/libros/editar/${libro.id}|}" class="btn btn-warning">✏️ Editar</a>
+            <a th:href="@{/libros}" class="btn btn-secondary">← Volver</a>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

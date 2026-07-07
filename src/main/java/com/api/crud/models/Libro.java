@@ -1,91 +1,57 @@
 package com.api.crud.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Libro {
-@Id
-@GeneratedValue (strategy = GenerationType.IDENTITY)
-private Long id;
 
-private String nombrelibro;
-private String autor;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-@Lob
-private String titulo;
+    @NotBlank(message = "El nombre del libro es obligatorio")
+    @Size(max = 200, message = "Máximo 200 caracteres")
+    private String nombrelibro;
 
-@Lob
-private String capitulos;
+    @NotBlank(message = "El autor es obligatorio")
+    private String autor;
 
+    @Lob
+    private String titulo;
 
-private String contenido;
+    @Lob
+    private String capitulos;
 
-private String caracteristicas;
+    private String contenido;
 
-@Lob
+    private String caracteristicas;
 
-private String prefacio;
+    @Lob
+    private String prefacio;
 
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getNombrelibro() { return nombrelibro; }
+    public void setNombrelibro(String nombrelibro) { this.nombrelibro = nombrelibro; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombrelibro() {
-        return nombrelibro;
-    }
-
-    public void setNombrelibro(String nombrelibro) {
-        this.nombrelibro = nombrelibro;
-    }
-
-    public String getCaracteristicas() {
-        return caracteristicas;
-    }
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
-    public void setCaracteristicas(String caracteristicas) {
-        this.caracteristicas = caracteristicas;
-    }
-
-    public String getContenido() {
-        return contenido;
-    }
-
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
-    }
-
-    public String getPrefacio() {
-        return prefacio;
-    }
-
-    public void setPrefacio(String prefacio) {
-        this.prefacio = prefacio;
-    }
+    public String getAutor() { return autor; }
+    public void setAutor(String autor) { this.autor = autor; }
 
     public String getTitulo() { return titulo; }
-
     public void setTitulo(String titulo) { this.titulo = titulo; }
 
-    public String getCapitulos() {
-        return capitulos;
-    }
+    public String getCapitulos() { return capitulos; }
+    public void setCapitulos(String capitulos) { this.capitulos = capitulos; }
 
-    public void setCapitulos(String capitulos) {
-        this.capitulos = capitulos;
-    }
+    public String getContenido() { return contenido; }
+    public void setContenido(String contenido) { this.contenido = contenido; }
+
+    public String getCaracteristicas() { return caracteristicas; }
+    public void setCaracteristicas(String caracteristicas) { this.caracteristicas = caracteristicas; }
+
+    public String getPrefacio() { return prefacio; }
+    public void setPrefacio(String prefacio) { this.prefacio = prefacio; }
 }
-
-
-

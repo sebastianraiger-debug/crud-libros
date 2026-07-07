@@ -2,10 +2,11 @@ package com.api.crud.controllers;
 
 import com.api.crud.models.Libro;
 import com.api.crud.repositories.ILibroRepository;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/libros")
@@ -21,7 +22,6 @@ class LibroController {
     public String listar(Model model) {
         model.addAttribute("libros", libroRepository.findAll());
         return "libros/lista";
-
     }
 
     @GetMapping("/nuevo")
@@ -31,7 +31,10 @@ class LibroController {
     }
 
     @PostMapping
-    public String guardar(@ModelAttribute Libro libro) {
+    public String guardar(@Valid @ModelAttribute Libro libro, BindingResult resultado) {
+        if (resultado.hasErrors()) {
+            return "libros/formulario";
+        }
         libroRepository.save(libro);
         return "redirect:/libros";
     }
@@ -54,6 +57,4 @@ class LibroController {
         return "libros/ver";
     }
 }
-
-
 
