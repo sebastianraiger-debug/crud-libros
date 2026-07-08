@@ -37,7 +37,13 @@
             <h4 th:text="${libro.id == null ? 'Nuevo Libro' : 'Editar Libro'}" class="mb-0"></h4>
         </div>
         <div class="card-body">
-            <form th:action="@{/libros}" th:object="${libro}" method="post">
+            <!-- Portada del libro -->
+            <div th:if="${libro.rutaPortada}" class="text-center mb-4">
+                <img th:src="${libro.rutaPortada}"
+                     style="max-height: 300px; max-width: 100%;"
+                     class="rounded shadow">
+            </div>
+            <form th:action="@{/libros}" th:object="${libro}" method="post" enctype="multipart/form-data">
                 <input type="hidden" th:field="*{id}"/>
 
                 <div class="mb-3">
@@ -71,6 +77,16 @@
                 <div class="mb-3">
                     <label class="form-label fw-bold">Características</label>
                     <input type="text" class="form-control" th:field="*{caracteristicas}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Portada del libro</label>
+                    <input type="file" class="form-control" name="archivoPortada" accept="image/*">
+                    <small class="text-muted">Formatos: JPG, PNG, GIF</small>
+                    <!-- Muestra la portada actual si existe -->
+                    <div th:if="${libro.rutaPortada}" class="mt-2">
+                        <img th:src="${libro.rutaPortada}" style="max-height: 150px;" class="rounded shadow-sm">
+                        <p class="text-muted small mt-1">Portada actual — sube una nueva para cambiarla</p>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold">Prefacio</label>

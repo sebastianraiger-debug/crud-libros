@@ -18,6 +18,8 @@ public class Libro {
     @NotBlank(message = "El autor es obligatorio")
     private String autor;
 
+    private String rutaPortada;
+
     @Lob
     private String titulo;
 
@@ -39,6 +41,9 @@ public class Libro {
 
     public String getAutor() { return autor; }
     public void setAutor(String autor) { this.autor = autor; }
+
+    public String getRutaPortada() { return rutaPortada; }
+    public void setRutaPortada(String rutaPortada) { this.rutaPortada = rutaPortada; }
 
     public String getTitulo() { return titulo; }
     public void setTitulo(String titulo) { this.titulo = titulo; }
