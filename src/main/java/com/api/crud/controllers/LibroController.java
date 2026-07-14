@@ -1,14 +1,18 @@
 package com.api.crud.controllers;
 
+import com.api.crud.MensajeService;
 import com.api.crud.models.Libro;
 import com.api.crud.repositories.ILibroRepository;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.api.crud.MensajeService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,6 +25,8 @@ class LibroController {
 
     private final ILibroRepository libroRepository;
     private final String CARPETA_PORTADAS = "src/main/resources/static/images/portadas/";
+    @Autowired
+    private MensajeService mensajeService;
 
     LibroController(ILibroRepository libroRepository) {
         this.libroRepository = libroRepository;
@@ -72,7 +78,8 @@ class LibroController {
         }
 
         libroRepository.save(libro);
-        redirectAttributes.addFlashAttribute("mensaje", "Libro guardado correctamente ✅");
+        mensajeService.enviarMensaje("Nuevo libro guardado: " + libro.getNombrelibro());
+        redirectAttributes.addFlashAttribute("mensaje", "Libro guardado correctamente ✅");mensajeService.enviarMensaje("Nuevo libro guardado: " + libro.getNombrelibro());
         return "redirect:/libros";
     }
 
